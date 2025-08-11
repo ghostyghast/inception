@@ -1,0 +1,58 @@
+x-common-config: &common
+  restart: unless-stopped
+  networks:
+    - inception
+
+services:
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    container_name: mariadb
+    ports:
+      - "3306:3306"
+    # volumes:
+    #   - db-data:/var/lib/mysql
+    environment:
+      DB_DATABASE : "${MARIADB_DATABASE}"
+      DB_HOSTNAME : "${MARIADB_HOSTNAME}"
+      DB_USER : "${MARIADB_USER}"
+      DB_PASSWORD : "${MARIADB_PASSWORD}"
+      DB_ROOT_PASSWORD : "${MARIADB_ROOT_PASSWORD}"
+    <<: *common
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress/
+    container_name: wordpress
+    environment:
+      MARIADB_DATABASE : "${MARIADB_DATABASE}"
+      MARIADB_HOSTNAME : "${MARIADB_HOSTNAME}"
+      MARIADB_USER : "${MARIADB_USER}"
+      MARIADB_PASSWORD : "${MARIADB_PASSWORD}"
+      MARIADB_ROOT_PASSWORD : "${MARIADB_ROOT_PASSWORD}"
+    ports:
+      - "9000:9000"
+    volumes:
+      - wp-data:/var/www/html
+    <<: *common
+
+  nginx:
+    build:
+      context: ./requirements/nginx/
+    container_name: nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wp-data:/var/www/html
+    <<: *common
+
+volumes:
+  db-data:
+  wp-data:
+
+networks:
+  inception:
+    driver: bridge
