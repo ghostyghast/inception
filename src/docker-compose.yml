@@ -6,24 +6,25 @@ x-common-config: &common
 services:
 
   mariadb:
-    build:
-      context: ./requirements/mariadb
+    build: ./requirements/mariadb
+    image: inception-mariadb
     container_name: mariadb
     ports:
       - "3306:3306"
-    # volumes:
-    #   - db-data:/var/lib/mysql
+    volumes:
+      - db-data:${MARIADB_DATADIR}
     environment:
       DB_DATABASE : "${MARIADB_DATABASE}"
       DB_HOSTNAME : "${MARIADB_HOSTNAME}"
       DB_USER : "${MARIADB_USER}"
       DB_PASSWORD : "${MARIADB_PASSWORD}"
       DB_ROOT_PASSWORD : "${MARIADB_ROOT_PASSWORD}"
+      DB_DATADIR: "${MARIADB_DATADIR}"
     <<: *common
 
   wordpress:
-    build:
-      context: ./requirements/wordpress/
+    build: ./requirements/wordpress/
+    image: inception-wordpress
     container_name: wordpress
     environment:
       MARIADB_DATABASE : "${MARIADB_DATABASE}"
@@ -38,8 +39,8 @@ services:
     <<: *common
 
   nginx:
-    build:
-      context: ./requirements/nginx/
+    build: ./requirements/nginx/
+    image: inception-nginx
     container_name: nginx
     ports:
       - "443:443"
