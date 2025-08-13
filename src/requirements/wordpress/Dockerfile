@@ -25,8 +25,8 @@ RUN sed -i 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /etc/php83/php-fpm
 
 COPY tools/wp-config.sh /
 
-RUN chmod +x /wp-config.sh && sh /wp-config.sh
+RUN chmod +x /wp-config.sh
 
 EXPOSE 9000
 
-CMD ["php-fpm83", "-F"]
+ENTRYPOINT [ "/wp-config.sh" ]
