@@ -1,10 +1,8 @@
-FROM alpine:3.22.0
+FROM debian:bullseye
 
-RUN apk add --no-cache mariadb mariadb-client envsubst
+RUN apt-get update && apt-get upgrade -y
 
-RUN mkdir -p /var/lib/mysql /run/mysqld
-
-RUN chown -R nobody:nogroup /var/lib/mysql /run/mysqld
+RUN apt-get install -y mariadb-server netcat gettext
 
 COPY tools/init.sql.template /
 COPY tools/init-db.sh /
@@ -13,4 +11,4 @@ RUN chmod +x /init-db.sh
 
 EXPOSE 3306
 
-CMD ["/init-db.sh"]
+ENTRYPOINT ["/init-db.sh"]
