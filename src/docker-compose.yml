@@ -22,6 +22,12 @@ services:
       DB_PASSWORD : "${MARIADB_PASSWORD}"
       DB_ROOT_PASSWORD : "${MARIADB_ROOT_PASSWORD}"
       DB_DATADIR: "${MARIADB_DATADIR}"
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u root -p${MARIADB_ROOT_PASSWORD}"]
+      interval: 1m30s
+      timeout: 15s
+      retries: 3
+      start_period: 30s
     <<: *common
 
   wordpress:
