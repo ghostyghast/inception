@@ -12,7 +12,9 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - db-data:${MARIADB_DATADIR}
+      - type: bind
+        source: ~/data/mariadb/
+        target: ${MARIADB_DATADIR}
     environment:
       DB_DATABASE : "${MARIADB_DATABASE}"
       DB_HOSTNAME : "${MARIADB_HOSTNAME}"
@@ -35,7 +37,12 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - wp-data:/var/www/html
+      - type: bind
+        source: ~/data/wordpress
+        target: /var/www/html
+    depends_on:
+      mariadb:
+        condition: service_healthy
     <<: *common
 
   nginx:
@@ -47,12 +54,10 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wp-data:/var/www/html
+      - type: bind
+        source: ~/data/wordpress
+        target: /var/www/html
     <<: *common
-
-volumes:
-  db-data:
-  wp-data:
 
 networks:
   inception:
