@@ -24,7 +24,7 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 RUN chown -R nobody:nogroup /var/www/html
 
 # Configure PHP-FPM to listen on all interfaces
-RUN sed -i 's/listen = 127.0.0.1:9000/listen = 0.0.0.0:9000/' /etc/php83/php-fpm.d/www.conf
+RUN sed -i 's/listen = 127.0.0.1:9000/listen = 9000/' /etc/php83/php-fpm.d/www.conf
 
 COPY tools/wp-config.sh /
 COPY tools/wp-cli.yml /
