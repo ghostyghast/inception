@@ -1,4 +1,5 @@
-# DB User info
+# Script to install requirements in vm
+echo "# DB User info
 MARIADB_ROOT_PASSWORD=
 MARIADB_PASSWORD=
 MARIADB_USER=
@@ -11,4 +12,5 @@ MARIADB_DATADIR="/var/lib/mysqld"
 WP_ADMIN=
 WP_ADMIN_PASSWORD=
 WP_USER=
-WP_USER_PASSWORD=
+WP_USER_PASSWORD=" > src/.env
+sudo apt install make docker docker-compose
