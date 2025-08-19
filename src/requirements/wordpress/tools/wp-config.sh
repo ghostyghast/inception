@@ -1,8 +1,8 @@
 #! /bin/sh
 
-if ! wp core is-installed --path=/var/www/html; then
+if ! wp core is-installed 2>/dev/null; then
     echo "wp not installed, downloading...."
-    php -d memory_limit=512M "$(which wp)" core download --path=/var/www/html --locale=en_GB
+    php -d memory_limit=512M "$(which wp)" core download --locale=en_GB
     echo "creating config..."
     wp config create --dbname=$MARIADB_DATABASE --dbuser=$MARIADB_USER --dbpass=$MARIADB_PASSWORD --dbhost=$MARIADB_HOSTNAME --locale=en_GB
     echo "installing wp..."
