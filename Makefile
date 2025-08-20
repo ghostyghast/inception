@@ -1,5 +1,5 @@
 
-COMPOSE_CMD = docker-compose -f ./src/docker-compose.yml
+COMPOSE_CMD = docker compose -f ./src/docker-compose.yml
 
 up :
 	@$(COMPOSE_CMD) up --build
