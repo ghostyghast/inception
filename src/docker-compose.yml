@@ -3,6 +3,13 @@ x-common-config: &common
   networks:
     - inception
 
+x-bind-volumes: &bind-volumes
+  type: bind
+  source: ~/data/wordpress
+  target: /var/www/html
+  bind:
+    create_host_path: true
+
 services:
 
   mariadb:
@@ -11,10 +18,6 @@ services:
     container_name: mariadb
     ports:
       - "3306:3306"
-    volumes:
-      - type: bind
-        source: ~/data/mariadb/
-        target: ${MARIADB_DATADIR}
     environment:
       DB_DATABASE : "${MARIADB_DATABASE}"
       DB_HOSTNAME : "${MARIADB_HOSTNAME}"
@@ -28,12 +31,18 @@ services:
       timeout: 15s
       retries: 3
       start_period: 30s
+    volumes: 
+      - <<: *bind-volumes
+        source: ~/data/mariadb/
+        target: ${MARIADB_DATADIR}
     <<: *common
 
   wordpress:
     build: ./requirements/wordpress/
     image: inception-wordpress
     container_name: wordpress
+    ports:
+      - "9000:9000"
     environment:
       MARIADB_DATABASE : "${MARIADB_DATABASE}"
       MARIADB_HOSTNAME : "${MARIADB_HOSTNAME}"
@@ -43,15 +52,11 @@ services:
       WP_ADMIN_PASSWORD : "${WP_ADMIN_PASSWORD}"
       WP_USER : "${WP_USER}"
       WP_USER_PASSWORD : "${WP_USER_PASSWORD}"
-    ports:
-      - "9000:9000"
-    volumes:
-      - type: bind
-        source: ~/data/wordpress
-        target: /var/www/html
     depends_on:
       mariadb:
         condition: service_healthy
+    volumes:
+      - <<: *bind-volumes
     <<: *common
 
   nginx:
@@ -63,9 +68,7 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - type: bind
-        source: ~/data/wordpress
-        target: /var/www/html
+      - <<: *bind-volumes
     <<: *common
 
 networks:
