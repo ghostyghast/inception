@@ -13,4 +13,4 @@ WP_ADMIN=
 WP_ADMIN_PASSWORD=
 WP_USER=
 WP_USER_PASSWORD=" > src/.env
-sudo apt install make docker docker-compose
+# mkdir -p ~/data/wordpress ~/data/mariadb
