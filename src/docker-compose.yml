@@ -79,6 +79,19 @@ services:
     ports:
       - "6379:6379"
     <<: *common
+  
+  vsftpd:
+    build: './bonus/vsftpd'
+    image: inception-vsftpd
+    ports:
+      - "21:21"
+      - "3000-3009:3000-3009"
+    environment:
+      VSFTPD_USER : "${VSFTPD_USER}"
+      VSFTPD_PASSWORD : "${VSFTPD_PASSWORD}"
+    volumes:
+      - <<: *bind-volumes
+    <<: *common
 
 networks:
   inception:
