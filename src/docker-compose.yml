@@ -8,8 +8,6 @@ services:
     build: ./requirements/mariadb
     image: mariadb
     container_name: mariadb
-    ports:
-      - "3306:3306"
     environment:
       DB_DATABASE : "${MARIADB_DATABASE}"
       DB_HOSTNAME : "${MARIADB_HOSTNAME}"
@@ -31,8 +29,6 @@ services:
     build: ./requirements/wordpress/
     image: wordpress
     container_name: wordpress
-    ports:
-      - "9000:9000"
     environment:
       MARIADB_DATABASE : "${MARIADB_DATABASE}"
       MARIADB_HOSTNAME : "${MARIADB_HOSTNAME}"
@@ -66,8 +62,6 @@ services:
     build: './bonus/redis/'
     image: redis
     container_name: redis
-    ports:
-      - "6379:6379"
     <<: *common
   
   vsftpd:
