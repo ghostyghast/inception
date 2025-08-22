@@ -53,6 +53,8 @@ services:
       WP_USER : "${WP_USER}"
       WP_USER_PASSWORD : "${WP_USER_PASSWORD}"
     depends_on:
+      redis:
+        condition: service_started
       mariadb:
         condition: service_healthy
     volumes:
