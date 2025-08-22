@@ -1,4 +1,3 @@
-
 COMPOSE_CMD = docker compose -f ./src/docker-compose.yml
 
 up :
