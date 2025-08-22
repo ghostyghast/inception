@@ -1,20 +1,12 @@
 x-common-config: &common
-  restart: unless-stopped
+  restart: on-failure
   networks:
     - inception
 
-x-bind-volumes: &bind-volumes
-  type: bind
-  source: ~/data/wordpress
-  target: /var/www/html
-  bind:
-    create_host_path: true
-
 services:
-
   mariadb:
     build: ./requirements/mariadb
-    image: inception-mariadb
+    image: mariadb
     container_name: mariadb
     ports:
       - "3306:3306"
@@ -32,14 +24,12 @@ services:
       retries: 3
       start_period: 30s
     volumes: 
-      - <<: *bind-volumes
-        source: ~/data/mariadb/
-        target: ${MARIADB_DATADIR}
+      - ~/data/mariadb/:${MARIADB_DATADIR}
     <<: *common
 
   wordpress:
     build: ./requirements/wordpress/
-    image: inception-wordpress
+    image: wordpress
     container_name: wordpress
     ports:
       - "9000:9000"
@@ -57,40 +47,40 @@ services:
         condition: service_started
       mariadb:
         condition: service_healthy
-    volumes:
-      - <<: *bind-volumes
+    volumes: &wp-volume
+      - ~/data/wordpress/:/var/www/html
     <<: *common
 
   nginx:
     build: ./requirements/nginx/
-    image: inception-nginx
+    image: nginx
     container_name: nginx
     ports:
       - "443:443"
     depends_on:
       - wordpress
-    volumes:
-      - <<: *bind-volumes
+    volumes: *wp-volume
     <<: *common
   
   redis:
     build: './bonus/redis/'
-    image: inception-redis
+    image: redis
+    container_name: redis
     ports:
       - "6379:6379"
     <<: *common
   
   vsftpd:
     build: './bonus/vsftpd'
-    image: inception-vsftpd
+    image: vsftpd
+    container_name: vsftpd
     ports:
       - "21:21"
       - "3000-3009:3000-3009"
     environment:
       VSFTPD_USER : "${VSFTPD_USER}"
       VSFTPD_PASSWORD : "${VSFTPD_PASSWORD}"
-    volumes:
-      - <<: *bind-volumes
+    volumes: *wp-volume
     <<: *common
 
 networks:
