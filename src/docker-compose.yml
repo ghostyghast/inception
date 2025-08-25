@@ -77,6 +77,13 @@ services:
     volumes: *wp-volume
     <<: *common
 
+  adminer:
+    build: "./bonus/adminer"
+    image: adminer
+    container_name: adminer
+    ports:
+      - "80:80"
+    <<: *common
 networks:
   inception:
     driver: bridge
