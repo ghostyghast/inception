@@ -27,8 +27,8 @@ RUN chown -R nobody:nogroup /var/www/html
 # Configure PHP-FPM to listen on all interfaces
 RUN sed -i 's/listen = 127.0.0.1:9000/listen = 9000/' /etc/php83/php-fpm.d/www.conf
 
-COPY conf/wp-config.sh /
-COPY tools/wp-cli.yml /
+COPY tools/wp-config.sh /
+COPY conf/wp-cli.yml /
 
 RUN chmod +x /wp-config.sh
 
