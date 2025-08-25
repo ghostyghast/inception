@@ -1,4 +1,3 @@
-# Script to install requirements in vm
 echo "# DB User info
 MARIADB_ROOT_PASSWORD=
 MARIADB_PASSWORD=
@@ -12,5 +11,9 @@ MARIADB_DATADIR="/var/lib/mysqld"
 WP_ADMIN=
 WP_ADMIN_PASSWORD=
 WP_USER=
-WP_USER_PASSWORD=" > src/.env
+WP_USER_PASSWORD=
+
+# FTP info
+VSFTPD_USER=ftp_user
+VSFTPD_PASSWORD=password" > src/.env
 # mkdir -p ~/data/wordpress ~/data/mariadb
