@@ -15,5 +15,9 @@ WP_USER_PASSWORD=
 
 # FTP info
 VSFTPD_USER=ftp_user
-VSFTPD_PASSWORD=password" > src/.env
+VSFTPD_PASSWORD=password
+
+# Linuxgsm
+SERVER=vhserver
+PASSWORD=" > src/.env
 # mkdir -p ~/data/wordpress ~/data/mariadb

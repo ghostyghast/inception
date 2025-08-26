@@ -84,6 +84,21 @@ services:
     ports:
       - "80:80"
     <<: *common
+
+  linuxgsm:
+    build: "./bonus/linuxgsm"
+    image: linuxgsm
+    container_name: linuxgsm
+    environment:
+      SERVER : "${SERVER}"
+      PASSWORD : "${PASSWORD}"
+    ports:
+      - "2456:2456"
+      - "2457:2457"
+    volumes:
+      - ~/data/valheim:/home/vhserver
+    <<: *common
+
 networks:
   inception:
     driver: bridge
