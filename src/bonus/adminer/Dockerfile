@@ -13,4 +13,4 @@ RUN wget www.adminer.org/static/download/5.3.0/adminer-5.3.0.php -O index.php
 RUN chown -R nobody:nogroup index.php && \
     chmod 755 -R index.php
 
-CMD ["php", "-S", "0.0.0.0:80"]
+CMD ["php", "-S", "0.0.0.0:8080"]
