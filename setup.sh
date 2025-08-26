@@ -1,4 +1,4 @@
-echo "# DB User info
+echo -n "# DB User info
 MARIADB_ROOT_PASSWORD=
 MARIADB_PASSWORD=
 MARIADB_USER=
@@ -14,10 +14,9 @@ WP_USER=
 WP_USER_PASSWORD=
 
 # FTP info
-VSFTPD_USER=ftp_user
-VSFTPD_PASSWORD=password
+VSFTPD_USER=
+VSFTPD_PASSWORD=
 
 # Linuxgsm
 SERVER=vhserver
 PASSWORD=" > src/.env
-# mkdir -p ~/data/wordpress ~/data/mariadb
