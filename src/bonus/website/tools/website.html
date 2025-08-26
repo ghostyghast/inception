@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>amaligno's Personal Website</title>
+	<style>
+		body {
+			background: #87ceeb url('https://www.transparenttextures.com/patterns/buried.png');
+			color: #000080;
+			font-family: 'Comic Sans MS', 'Arial', sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+		#container {
+			width: 800px;
+			margin: 30px auto;
+			background: #f6e9b0 url('https://www.transparenttextures.com/patterns/starring.png');
+			border: 3px double #000080;
+			box-shadow: 0 0 20px #410000;
+			padding: 20px;
+		}
+		h1 {
+			text-align: center;
+			font-size: 2.5em;
+			color: #ff4500;
+			text-shadow: 5px 5px 0 #2f0b0b;
+		}
+		hr {
+			border: 1px dashed #000080;
+		}
+		nav {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		nav a {
+			color: #000080;
+			background: #e0e0ff;
+			border: 1px solid #000080;
+			padding: 5px 15px;
+			margin: 0 5px;
+			text-decoration: none;
+			font-weight: bold;
+			border-radius: 8px;
+		}
+		nav a:hover {
+			background: #ffebcd;
+			color: #ff4500;
+		}
+		.section {
+            background: #d08e8e url('https://www.transparenttextures.com/patterns/brick-wall-dark.png');
+            padding: 1%;
+			margin-bottom: 30px;
+		}
+		.marquee {
+			background: #e0e0ff;
+			color: #ff4500;
+			font-size: 1.2em;
+			padding: 5px;
+			border: 1px solid #000080;
+			margin-bottom: 20px;
+		}
+		.footer {
+			text-align: center;
+			font-size: 0.9em;
+			color: #888;
+			margin-top: 40px;
+		}
+        .side-by-side {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px
+        }
+        .side-by-side img {
+            margin-left: 20px;
+        }
+        
+        .project {
+            background: #000080;
+        }
+
+	</style>
+</head>
+<body>
+	<div id="container">
+		<h1>Welcome to amaligno's Place!</h1>
+		<div class="marquee">
+			<marquee behavior="scroll" direction="left">Hello. This is my personal website. Graphic design is my passion</marquee>
+		</div>
+		<nav>
+			<a href="#about">About Me</a>
+			<a href="#whatido">What I do</a>
+			<a href="#projects">Projects</a>
+		</nav>
+		<hr>
+		<div class="section" id="about">
+			<h1>About Me</h1>
+                <p>Hi! I'm amaligno. I'm really good at making websites :)</p>
+		</div>
+        <div class="section " id="whatido">
+            <h1>What I Do</h1>
+            <div class="side-by-side">
+                <div>
+                    <ul>
+                        <li>I play games</li>
+                        <li>I write code</li>
+                        <li>I listen to music</li>
+                    </ul>
+                </span>
+            </div>
+            <span>
+                <img src="https://media.tenor.com/A8AkfmeU9GUAAAAM/aol-dancing.gif"><img>
+            </div>
+        </div>
+		<div class="section" id="projects">
+			<h1>Projects</h1>
+            <div class="side-by-side">
+                <span class="project">
+                    <a href="https://github.com/eth1711/minishell" target="_blank">
+                        <img src="assets/minishell.gif"></img>
+                    </a>
+                </span>
+            </div>
+		</div>
+		<hr>
+		<div class="footer">
+			&copy; 2025 amaligno | Made with love and nostalgia
+		</div>
+	</div>
+</body>
+</html>

@@ -82,6 +82,14 @@ services:
     image: adminer
     container_name: adminer
     ports:
+      - "8080:8080"
+    <<: *common
+
+  website:
+    build: "./bonus/website"
+    image: website
+    container_name: website
+    ports:
       - "80:80"
     <<: *common
 
