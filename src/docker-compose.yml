@@ -22,7 +22,7 @@ services:
       retries: 3
       start_period: 30s
     volumes: 
-      - ~/data/mariadb/:${MARIADB_DATADIR}
+      - db-data:${MARIADB_DATADIR}
     <<: *common
 
   wordpress:
@@ -44,7 +44,7 @@ services:
       mariadb:
         condition: service_healthy
     volumes: &wp-volume
-      - ~/data/wordpress/:/var/www/html
+      - wp-data:/var/www/html
     <<: *common
 
   nginx:
@@ -104,9 +104,29 @@ services:
       - "2456:2456"
       - "2457:2457"
     volumes:
-      - ~/data/valheim:/home/vhserver
+      - lgsm-data:/home/vhserver
     <<: *common
 
 networks:
   inception:
     driver: bridge
+
+volumes:
+  wp-data:
+    driver: local
+    driver_opts:
+      device: ~/data/wordpress
+      o: bind
+      type: none
+  db-data:
+    driver: local
+    driver_opts:
+      device: ~/data/mariadb
+      o: bind
+      type: none
+  lgsm-data:
+    driver: local
+    driver_opts:
+      device: ~/data/${SERVER}
+      o: bind
+      type: none
