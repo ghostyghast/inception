@@ -18,11 +18,14 @@ fi
 echo "installing dependencies..."
 ./$SERVER auto-install > /dev/null
 
-sed -i "s/serverpassword=\"\"/serverpassword=\"$PASSWORD\"/" lgsm/config-lgsm/vhserver/_default.cfg
+CONF_PATH=~/lgsm/config-lgsm/$SERVER/
+
+echo creating config
+cat < $CONF_PATH/_default.cfg > $CONF_PATH/$SERVER.cfg
+sed -i "s/serverpassword=\"\"/serverpassword=\"$PASSWORD\"/" $CONF_PATH/$SERVER.cfg
 
 echo "Starting $SERVER"
 ./$SERVER start
-sleep 5
 ./${GAMESERVER} details
-tail -f log/script/*
+tail -n 3 -q -f ~/log/script/
 EOF
