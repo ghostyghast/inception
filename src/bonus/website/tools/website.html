@@ -12,7 +12,7 @@
 			padding: 0;
 		}
 		#container {
-			width: 800px;
+			width: 70%;
 			margin: 30px auto;
 			background: #f6e9b0 url('https://www.transparenttextures.com/patterns/starring.png');
 			border: 3px double #000080;
@@ -78,11 +78,48 @@
             background: #000080;
         }
 
+		p {
+			font-size: x-large;
+		}
+		.projects-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+			gap: 20px;
+			justify-items: center;
+		}
+		.project-item {
+			background: #000080;
+			padding: 15px;
+			border-radius: 8px;
+			text-align: center;
+			color: white;
+		}
+		.project-item h3 {
+			margin-top: 0;
+			margin-bottom: 10px;
+			color: white;
+			font-size: 1.2em;
+		}
+		.project-item img {
+			max-width: 50%;
+			height: auto;
+			border-radius: 4px;
+		}
+		.project-item a {
+			display: block;
+			text-decoration: none;
+		}
 	</style>
 </head>
 <body>
 	<div id="container">
-		<h1>Welcome to amaligno's Place!</h1>
+		<div>
+			<h1 style="
+			color: #ecb7e3;
+			background-color: #2d1f1f;
+			">
+			Welcome to amaligno's Place!</h1>
+		</div>
 		<div class="marquee">
 			<marquee behavior="scroll" direction="left">Hello. This is my personal website. Graphic design is my passion</marquee>
 		</div>
@@ -99,7 +136,7 @@
         <div class="section " id="whatido">
             <h1>What I Do</h1>
             <div class="side-by-side">
-                <div>
+                <div style="font-size: x-large;">
                     <ul>
                         <li>I play games</li>
                         <li>I write code</li>
@@ -113,18 +150,30 @@
         </div>
 		<div class="section" id="projects">
 			<h1>Projects</h1>
-            <div class="side-by-side">
-                <span class="project">
+            <div class="projects-grid">
+                <div class="project-item">
+                    <h3>Minishell</h3>
                     <a href="https://github.com/eth1711/minishell" target="_blank">
-                        <img src="assets/minishell.gif"></img>
+                        <img src="assets/minishell.gif" alt="Minishell Project">
                     </a>
-                </span>
+                </div>
+                <div class="project-item">
+                    <h3>So Long</h3>
+                    <a href="https://github.com/ghostyghast/so_long" target="_blank">
+                        <img src="assets/so_long_demo.gif" alt="Project 2">
+                    </a>
+                </div>
             </div>
 		</div>
-		<hr>
 		<div class="footer">
-			&copy; 2025 amaligno | Made with love and nostalgia
+			&copy; 2025 amaligno | Made with love
 		</div>
+	</div>
+	<div style="position: fixed; bottom: 0; right: 0;">
+		<img style="width: 300px; height: 300px;" src="assets/window.png"></img>
+	</div>
+	<div style="position: fixed; bottom: 0; right: 0;">
+		<img style="width: 300px; height: 300px;" src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUydGNzOHY3OHFsNDNuM2t0YnB4b2w3a242Ymw5bndtOHl6ejZmZ2s1MCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/3o85xKrwKwGLLeYDao/source.gif" alt="clippy">
 	</div>
 </body>
 </html>
