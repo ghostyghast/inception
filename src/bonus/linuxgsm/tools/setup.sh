@@ -10,15 +10,15 @@ else
     echo "$SERVER already installed"
 fi
 
+
+echo "installing dependencies..."
+./$SERVER auto-install > /dev/null
+
 echo creating config
 export CONF_PATH="$HOME/lgsm/config-lgsm/$SERVER"
 echo conf path: $CONF_PATH
 cat $CONF_PATH/_default.cfg > $CONF_PATH/$SERVER.cfg
 sed -i "s/serverpassword=\"\"/serverpassword=\"$PASSWORD\"/" $CONF_PATH/$SERVER.cfg
-
-echo "installing dependencies..."
-./$SERVER auto-install > /dev/null
-
 echo "Starting $SERVER"
 ./$SERVER start
 ./${GAMESERVER} details
